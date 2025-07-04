@@ -1,7 +1,13 @@
 import { useFonts } from 'expo-font';
 import { KeyboardAvoidingView, ScrollView, Text, View } from "react-native";
 import '../global.css';
-import Input from '../src/components/inputs/input';
+import {
+  PaymentButton,
+  PrimaryButton,
+  SecondaryButton,
+  SocialButton
+} from '../src/components/button/index';
+import Input from '../src/components/input/input';
 import { useResponsive } from '../src/hooks/useResponsive';
 import '../tailwind.config';
 
@@ -50,8 +56,46 @@ export default function Index() {
           Bold Font 
         </Text>
 
-        <View style={{ width: '100%', maxWidth: 400 }}>
-  
+    <View style={{ marginBottom: calculateHeight(32), width: '100%', maxWidth: 400, gap: calculateHeight(12) }}>    
+       <View style={{ gap: calculateHeight(12) }}>
+          <PrimaryButton 
+            title="Button" 
+            fullWidth
+            icon='heart-outline'
+            iconSize={20}
+          />
+
+          <SecondaryButton 
+            title="Button" 
+            fullWidth
+          />
+
+          <SocialButton 
+            title="Continue with Google" 
+            icon="google"
+            iconSize={20}
+            fullWidth
+          />
+          
+          <SocialButton 
+            title="Continue with Apple" 
+            icon="apple"
+            iconSize={25}
+            size='medium'
+            fullWidth
+          />
+          
+          <PaymentButton 
+            title="Payment Button" 
+            price='100$'
+            size='medium'
+            disabled={false}
+            fullWidth
+          />
+
+        </View>
+      </View>
+        <View style={{ width: '100%', maxWidth: 400, marginTop: calculateHeight(24) }}>
           <Input 
             placeholder="Password"
             icon="lock"

@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
-import Icon, { IconName } from '../../assets/Icon';
 import { theme } from '../../constants/Colors';
 import { useResponsive } from '../../hooks/useResponsive';
+import Icon, { IconName } from '../icon/Icon';
 
 import {
-  Pressable,
-  Text,
-  TextInput,
-  TextInputProps,
-  TouchableWithoutFeedback,
-  View,
+    Pressable,
+    Text,
+    TextInput,
+    TextInputProps,
+    TouchableWithoutFeedback,
+    View,
 } from 'react-native';
 
 interface InputProps extends TextInputProps {
@@ -47,7 +47,7 @@ export default function Input({
   };
 
   const inputHeight = variant === 'small' ? calculateHeight(40) : calculateHeight(56);
-  const inputWidth = variant === 'small' ? calculateWidth(80) : calculateWidth(350);
+  const inputWidth = variant === 'small' ? calculateWidth(80) : calculateWidth(335);
 
   const handleContainerPress = () => {
     inputRef.current?.focus();
@@ -68,10 +68,9 @@ export default function Input({
       {label && (
         <Text
           style={{
-            fontSize: calculateFontSize(14),
+            fontSize: calculateFontSize(15),
             marginBottom: calculateHeight(8),
             color: theme.text.primary,
-            fontWeight: '500',
           }}
         >
           {label}
