@@ -13,6 +13,7 @@ import ChevronDownIcon from '../../assets/icons/chevron-down'
 import ChevronLeftIcon from '../../assets/icons/chevron-left'
 import ChevronRightIcon from '../../assets/icons/chevron-right'
 import ChevronUpIcon from '../../assets/icons/chevron-up'
+import EyeIcon from '../../assets/icons/eye'
 import EyeOffIcon from '../../assets/icons/eye-off'
 import FilterIcon from '../../assets/icons/filter'
 import GoogleIcon from '../../assets/icons/google'
@@ -64,6 +65,7 @@ const icons = {
   trash: TrashIcon,
   lock: LockIcon,
   'eye-off': EyeOffIcon,
+  eye: EyeIcon,
   filter: FilterIcon,
   
 

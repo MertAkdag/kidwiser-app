@@ -63,6 +63,10 @@ export default function Input({
     props.onBlur?.(event);
   };
 
+  const togglePasswordVisibility = () => {
+    setSecure(!secure);
+  };
+
   return (
     <View style={{ marginBottom: calculateHeight(16) }}>
       {label && (
@@ -135,7 +139,7 @@ export default function Input({
 
           {isPassword && (
             <Pressable 
-              onPress={() => setSecure(!secure)}
+              onPress={togglePasswordVisibility}
               style={{ 
                 marginLeft: calculateWidth(8),
                 padding: calculateWidth(4),
@@ -143,7 +147,7 @@ export default function Input({
               hitSlop={10}
             >
               <Icon 
-                name="eye-off" 
+                name={secure ? "eye" : "eye-off"} 
                 size={iconSize} 
                 color={theme.colors.greyscale[400]} 
               />
