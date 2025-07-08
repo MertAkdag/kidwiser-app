@@ -39,6 +39,7 @@ import TrashIcon from '../../assets/icons/trash'
 import TriangleSquareCircleIcon from '../../assets/icons/triangle-square-circle'
 import UserIcon from '../../assets/icons/user'
 import User1Icon from '../../assets/icons/user-1'
+import XIcon from '../../assets/icons/x'
 
 const icons = {
   bell: BellIcon,
@@ -67,6 +68,7 @@ const icons = {
   'eye-off': EyeOffIcon,
   eye: EyeIcon,
   filter: FilterIcon,
+  x: XIcon,
   
 
   camera: CameraIcon,

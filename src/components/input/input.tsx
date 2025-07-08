@@ -8,17 +8,21 @@ import {
     Text,
     TextInput,
     TextInputProps,
+    TouchableOpacity,
     TouchableWithoutFeedback,
     View,
+    ViewStyle,
 } from 'react-native';
 
-interface InputProps extends TextInputProps {
+export interface InputProps extends TextInputProps {
   label?: string;
   icon?: React.ReactNode | IconName;
   iconColor?: string;
   iconSize?: number;
   isPassword?: boolean;
-  variant?: 'default' | 'small';
+  variant?: 'default' | 'small' | 'search';
+  onClear?: () => void;
+  showClearButton?: boolean;
 }
 
 export default function Input({
@@ -28,6 +32,8 @@ export default function Input({
   iconSize = 20,
   isPassword = false,
   variant = 'default',
+  onClear,
+  showClearButton = false,
   style,
   ...props
 }: InputProps) {
@@ -36,18 +42,55 @@ export default function Input({
   const [secure, setSecure] = useState(isPassword);
   const inputRef = useRef<TextInput>(null);
 
+  const isSearchVariant = variant === 'search';
+  const searchIcon = isSearchVariant ? 'search' : icon;
+  const searchIconColor = isSearchVariant ? theme.colors.greyscale[500] : iconColor;
+  const shouldShowClearButton = isSearchVariant ? (props.value && String(props.value).length > 0) : showClearButton;
+
   const renderIcon = () => {
-    if (!icon) return null;
+    const iconToRender = searchIcon || icon;
+    if (!iconToRender) return null;
     
-    if (typeof icon === 'string') {
-      return <Icon name={icon as IconName} size={iconSize} color={iconColor} />;
+    if (typeof iconToRender === 'string') {
+      return <Icon name={iconToRender as IconName} size={iconSize} color={searchIconColor} />;
     }
     
-    return icon;
+    return iconToRender;
   };
 
-  const inputHeight = variant === 'small' ? calculateHeight(40) : calculateHeight(56);
-  const inputWidth = variant === 'small' ? calculateWidth(80) : calculateWidth(335);
+  const getVariantStyles = (): ViewStyle => {
+    switch (variant) {
+      case 'small':
+        return {
+          height: calculateHeight(40),
+          width: calculateWidth(80),
+          borderRadius: calculateWidth(16),
+          backgroundColor: theme.colors.white,
+          borderWidth: 1.5,
+          borderColor: focused ? theme.colors.primary[500] : theme.colors.greyscale[200],
+        };
+      case 'search':
+        return {
+          height: calculateHeight(64),
+          width: '100%',
+          borderRadius: calculateWidth(16),
+          backgroundColor: focused ? theme.colors.white : 'transparent',
+          borderWidth: focused ? 2 : 1,
+          borderColor: focused ? theme.colors.primary[500] : theme.colors.greyscale[200],
+        };
+      default:
+        return {
+          height: calculateHeight(56),
+          width: calculateWidth(335),
+          borderRadius: calculateWidth(16),
+          backgroundColor: theme.colors.white,
+          borderWidth: 1.5,
+          borderColor: focused ? theme.colors.primary[500] : theme.colors.greyscale[200],
+        };
+    }
+  };
+
+  const variantStyles = getVariantStyles();
 
   const handleContainerPress = () => {
     inputRef.current?.focus();
@@ -67,6 +110,10 @@ export default function Input({
     setSecure(!secure);
   };
 
+  const handleClear = () => {
+    onClear?.();
+  };
+
   return (
     <View style={{ marginBottom: calculateHeight(16) }}>
       {label && (
@@ -83,28 +130,25 @@ export default function Input({
       
       <TouchableWithoutFeedback onPress={handleContainerPress}>
         <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: icon ? 'flex-start' : 'center',
-            paddingHorizontal: calculateWidth(16),
-            borderRadius: calculateWidth(12),
-            borderWidth: 1.5,
-            borderColor: focused ? theme.colors.primary[500] : theme.colors.greyscale[200],
-            backgroundColor: theme.colors.white,
-            height: inputHeight,
-            width: inputWidth,
-            shadowColor: focused ? theme.colors.primary[500] : 'transparent',
-            shadowOffset: {
-              width: 0,
-              height: 0,
+          style={[
+            {
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: (searchIcon || icon) ? 'flex-start' : 'center',
+              paddingHorizontal: calculateWidth(16),
+              shadowColor: focused ? theme.colors.primary[500] : 'transparent',
+              shadowOffset: {
+                width: 0,
+                height: 0,
+              },
+              shadowOpacity: focused ? 0.1 : 0,
+              shadowRadius: focused ? 4 : 0,
+              elevation: focused ? 2 : 0,
             },
-            shadowOpacity: focused ? 0.1 : 0,
-            shadowRadius: focused ? 4 : 0,
-            elevation: focused ? 2 : 0,
-          }}
+            variantStyles,
+          ]}
         >
-          {icon && (
+          {(searchIcon || icon) && (
             <View style={{ marginRight: calculateWidth(12) }}>
               {renderIcon()}
             </View>
@@ -119,13 +163,15 @@ export default function Input({
                 color: theme.text.primary,
                 paddingVertical: 0,
                 height: '100%',
-                textAlign: icon ? 'left' : 'center',
+                textAlign: (searchIcon || icon) ? 'left' : 'center',
                 textAlignVertical: 'center',
-                paddingRight: isPassword ? calculateWidth(8) : 0,
+                paddingRight: (isPassword || shouldShowClearButton) ? calculateWidth(8) : 0,
+                fontWeight: isSearchVariant ? '500' : 'normal',
               },
               style,
             ]}
-            placeholderTextColor={theme.colors.greyscale[400]}
+            placeholder={isSearchVariant ? "Search events..." : props.placeholder}
+            placeholderTextColor={isSearchVariant ? theme.colors.greyscale[300] : theme.colors.greyscale[400]}
             secureTextEntry={secure}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -152,6 +198,28 @@ export default function Input({
                 color={theme.colors.greyscale[400]} 
               />
             </Pressable>
+          )}
+
+          {shouldShowClearButton && (
+            <TouchableOpacity
+              onPress={handleClear}
+              style={{
+                width: calculateWidth(24),
+                height: calculateWidth(24),
+                borderRadius: calculateWidth(16),
+                backgroundColor: theme.colors.greyscale[400],
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginLeft: calculateWidth(8),
+              }}
+              hitSlop={8}
+            >
+              <Icon 
+                name="x" 
+                size={calculateWidth(12)} 
+                color={theme.colors.white} 
+              />
+            </TouchableOpacity>
           )}
         </View>
       </TouchableWithoutFeedback>

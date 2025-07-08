@@ -9,7 +9,7 @@ import {
   SocialButton
 } from '../src/components/button/index';
 import { PaymentMethodCard, ResetPasswordCard, SelectableCard } from '../src/components/card/card';
-import Input from '../src/components/input/input';
+import { Input } from '../src/components/input';
 import { theme } from '../src/constants/Colors';
 import { useResponsive } from '../src/hooks/useResponsive';
 import '../tailwind.config';
@@ -27,11 +27,12 @@ export default function Index() {
   const [selectedPayment, setSelectedPayment] = useState<string>('credit-card');
   const [selectedResetMethod, setSelectedResetMethod] = useState<string>('email');
   const [selectedTicketType, setSelectedTicketType] = useState<string>('general');
+  const [search, setSearch] = useState('');
 
   if (!fontsLoaded) {
     return null;
   }
-  
+
   return (
     <KeyboardAvoidingView 
       style={{ flex: 1 }}
@@ -108,6 +109,12 @@ export default function Index() {
             placeholder="Password"
             icon="lock"
             isPassword={true}
+          />
+          <Input
+            variant="search"
+            value={search}
+            onChangeText={setSearch}
+            onClear={() => setSearch('')}
           />
         </View>
         <View style={{ width: '100%', maxWidth: calculateWidth(400), gap: calculateHeight(12) }}>
@@ -192,8 +199,7 @@ export default function Index() {
                   style={{fontSize: calculateFontSize(22), color: theme.colors.red}}>
                     --------------
                   </Text>
-                </View>
-                
+                </View>          
       </ScrollView>
     </KeyboardAvoidingView>
   );
