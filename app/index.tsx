@@ -44,7 +44,7 @@ export default function Index() {
           justifyContent: 'center', 
           alignItems: 'center',
           paddingHorizontal: 24,
-          paddingVertical: 40
+          paddingVertical: 90
         }}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
