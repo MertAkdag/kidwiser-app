@@ -10,6 +10,7 @@ import {
 } from '../src/components/button/index';
 import { PaymentMethodCard, ResetPasswordCard, SelectableCard } from '../src/components/card/card';
 import { Input } from '../src/components/input';
+import { SegmentedControl } from '../src/components/segmented';
 import { theme } from '../src/constants/Colors';
 import { useResponsive } from '../src/hooks/useResponsive';
 import '../tailwind.config';
@@ -28,6 +29,7 @@ export default function Index() {
   const [selectedResetMethod, setSelectedResetMethod] = useState<string>('email');
   const [selectedTicketType, setSelectedTicketType] = useState<string>('general');
   const [search, setSearch] = useState('');
+  const [selected, setSelected] = useState(0);
 
   if (!fontsLoaded) {
     return null;
@@ -101,6 +103,12 @@ export default function Index() {
             disabled={false}
             fullWidth
           />
+
+          <SegmentedControl
+            labels={['deneme1', 'deneme2']}
+            selectedIndex={selected}
+            onChange={setSelected}
+            />
 
         </View>
       </View>
