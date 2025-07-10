@@ -9,6 +9,7 @@ import {
   SocialButton
 } from '../src/components/button/index';
 import { PaymentMethodCard, ResetPasswordCard, SelectableCard } from '../src/components/card/card';
+import { EventCard } from '../src/components/eventcard';
 import { Input } from '../src/components/input';
 import { SegmentedControl } from '../src/components/segmented';
 import { theme } from '../src/constants/Colors';
@@ -17,8 +18,36 @@ import '../tailwind.config';
 
 
 
+const exampleEvents = [
+  {
+    id: '1',
+    title: 'Disco Tarkan - Goodbye Party',
+    date: '12 July',
+    time: '08:00 PM',
+    location: 'Istanbul',
+    attendeeCount: 40,
+    attendeeAvatars: [
+      require('../src/assets/images/insan1.jpg'),
+      require('../src/assets/images/insan2.jpg'),
+    ],
+  },
+  {
+    id: '2',
+    title: '2000s Hip Hop Night',
+    date: '9 July',
+    time: '09:30 PM',
+    location: 'Antalya',
+    attendeeCount: 25,
+    attendeeAvatars: [
+      require('../src/assets/images/insan2.jpg'),
+      require('../src/assets/images/insan1.jpg'),
+    ],
+  },
+];
+
 export default function Index() {
   const { calculateFontSize, calculateHeight, calculateWidth} = useResponsive();
+  const [isEventLiked, setIsEventLiked] = useState(false);
 
   const [fontsLoaded] = useFonts({
     'SFProDisplay-Regular': require('../src/assets/fonts/sf_pro_display/SFPRODISPLAYREGULAR.ttf'),
@@ -41,7 +70,7 @@ export default function Index() {
       keyboardVerticalOffset={0}
     >
       <ScrollView 
-        style={{ flex: 1, backgroundColor: 'white' }}
+        style={{ flex: 1, backgroundColor: theme.colors.greyscale[200]}}
         contentContainerStyle={{ 
           flexGrow: 1, 
           justifyContent: 'center', 
@@ -126,15 +155,32 @@ export default function Index() {
           />
         </View>
         <View style={{ width: '100%', maxWidth: calculateWidth(400), gap: calculateHeight(12) }}>
-                
-                <Text className="text-primary-500 font-display-bold mb-4 mt-8"
-                  style={{fontSize: calculateFontSize(22), color: theme.colors.red}}>
-                    --------------
-                  </Text>
-                  <Text className="text-primary-500 font-display-bold mb-4"
-                  style={{fontSize: calculateFontSize(22), color: theme.colors.red}}>
-                    Payment Method 
-                  </Text>
+          <Text className="text-primary-500 font-display-bold mb-4 mt-8"
+            style={{fontSize: calculateFontSize(22), color: theme.colors.red}}>
+            Event Cards
+          </Text>
+
+          <EventCard
+            variant="list"
+            event={exampleEvents[0]}
+            liked={isEventLiked}
+            onLikeChange={setIsEventLiked}
+          />
+
+          <EventCard
+            variant="featured"
+            event={exampleEvents[1]}
+          />
+
+          <EventCard
+            variant="featured-bordered"
+            event={exampleEvents[1]}
+          />
+
+          <Text className="text-primary-500 font-display-bold mb-4 mt-8"
+            style={{fontSize: calculateFontSize(22), color: theme.colors.red}}>
+            Payment Method 
+          </Text>
                   
                   <PaymentMethodCard 
                     title="Credit or debit card"
