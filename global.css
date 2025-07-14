@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities; 
+
+@font-face {
+  font-family: 'SFProDisplay-Regular';
+  src: url('./src/assets/fonts/sf_pro_display/SFPRODISPLAYREGULAR.ttf');
+}
+
+@font-face {
+  font-family: 'SFProDisplay-Bold';
+  src: url('./src/assets/fonts/sf_pro_display/SFPRODISPLAYBOLD.ttf');
+}
+
+@font-face {
+  font-family: 'SFProDisplay-Medium';
+  src: url('./src/assets/fonts/sf_pro_display/SFPRODISPLAYMEDIUM.ttf');
+}
+
+@font-face {
+  font-family: 'SFProDisplay-BlackItalic';
+  src: url('./src/assets/fonts/sf_pro_display/SFPRODISPLAYBLACKITALIC.ttf');
+}
+
+@font-face {
+  font-family: 'SFProDisplay-HeavyItalic';
+  src: url('./src/assets/fonts/sf_pro_display/SFPRODISPLAYHEAVYITALIC.ttf');
+}
+
+@font-face {
+  font-family: 'SFProDisplay-LightItalic';
+  src: url('./src/assets/fonts/sf_pro_display/SFPRODISPLAYLIGHTITALIC.ttf');
+}
+
+@font-face {
+  font-family: 'SFProDisplay-SemiBoldItalic';
+  src: url('./src/assets/fonts/sf_pro_display/SFPRODISPLAYSEMIBOLDITALIC.ttf');
+}
+
+@font-face {
+  font-family: 'SFProDisplay-ThinItalic';
+  src: url('./src/assets/fonts/sf_pro_display/SFPRODISPLAYTHINITALIC.ttf');
+}
+
+@font-face {
+  font-family: 'SFProDisplay-UltraLightItalic';
+  src: url('./src/assets/fonts/sf_pro_display/SFPRODISPLAYULTRALIGHTITALIC.ttf');
+} 

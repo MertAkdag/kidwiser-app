@@ -1,22 +1,19 @@
-import { useFonts } from 'expo-font';
 import { useState } from 'react';
 import { KeyboardAvoidingView, ScrollView, Text, View } from "react-native";
-import '../global.css';
+import '../../../global.css';
+import '../../../tailwind.config';
 import {
   PaymentButton,
   PrimaryButton,
   SecondaryButton,
   SocialButton
-} from '../src/components/button/index';
-import { PaymentMethodCard, ResetPasswordCard, SelectableCard } from '../src/components/card/card';
-import { EventCard } from '../src/components/eventcard';
-import { Input } from '../src/components/input';
-import { SegmentedControl } from '../src/components/segmented';
-import { theme } from '../src/constants/Colors';
-import { useResponsive } from '../src/hooks/useResponsive';
-import '../tailwind.config';
-
-
+} from '../../components/button/index';
+import { PaymentMethodCard, ResetPasswordCard, SelectableCard } from '../../components/card/card';
+import { EventCard } from '../../components/eventcard';
+import { Input } from '../../components/input/index';
+import { SegmentedControl } from '../../components/segmented';
+import { theme } from '../../constants/Colors';
+import { useResponsive } from '../../hooks/useResponsive';
 
 const exampleEvents = [
   {
@@ -27,8 +24,8 @@ const exampleEvents = [
     location: 'Istanbul',
     attendeeCount: 40,
     attendeeAvatars: [
-      require('../src/assets/images/insan1.jpg'),
-      require('../src/assets/images/insan2.jpg'),
+      require('../../assets/images/insan1.jpg'),
+      require('../../assets/images/insan2.jpg'),
     ],
   },
   {
@@ -39,8 +36,8 @@ const exampleEvents = [
     location: 'Antalya',
     attendeeCount: 25,
     attendeeAvatars: [
-      require('../src/assets/images/insan2.jpg'),
-      require('../src/assets/images/insan1.jpg'),
+      require('../../assets/images/insan2.jpg'),
+      require('../../assets/images/insan1.jpg'),
     ],
   },
 ];
@@ -49,20 +46,11 @@ export default function Index() {
   const { calculateFontSize, calculateHeight, calculateWidth} = useResponsive();
   const [isEventLiked, setIsEventLiked] = useState(false);
 
-  const [fontsLoaded] = useFonts({
-    'SFProDisplay-Regular': require('../src/assets/fonts/sf_pro_display/SFPRODISPLAYREGULAR.ttf'),
-    'SFProDisplay-Bold': require('../src/assets/fonts/sf_pro_display/SFPRODISPLAYBOLD.ttf'),
-    'SFProDisplay-Medium': require('../src/assets/fonts/sf_pro_display/SFPRODISPLAYSEMIBOLDITALIC.ttf'),
-  });
   const [selectedPayment, setSelectedPayment] = useState<string>('credit-card');
   const [selectedResetMethod, setSelectedResetMethod] = useState<string>('email');
   const [selectedTicketType, setSelectedTicketType] = useState<string>('general');
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState(0);
-
-  if (!fontsLoaded) {
-    return null;
-  }
 
   return (
     <KeyboardAvoidingView 
@@ -82,17 +70,30 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
       >
         <Text 
-          className="text-red font-display mb-4"
-          style={{fontSize: calculateFontSize(42)}}
+          className="text-red mb-4"
+          style={{
+            fontSize: calculateFontSize(42),
+            fontFamily: 'SFProDisplay-Regular'
+          }}
         >
           Regular Font 
         </Text>
 
-        <Text className="text-xl text-primary-500 font-display-medium mb-4">
-          Medium Italic Font
+        <Text 
+          className="text-xl text-primary-500 mb-4"
+          style={{
+            fontFamily: 'SFProDisplay-Medium'
+          }}
+        >
+          Medium Font
         </Text>
         
-        <Text className="text-xl text-green font-display-bold mb-8">
+        <Text 
+          className="text-xl text-green mb-8"
+          style={{
+            fontFamily: 'SFProDisplay-Bold'
+          }}
+        >
           Bold Font 
         </Text>
 
@@ -155,8 +156,13 @@ export default function Index() {
           />
         </View>
         <View style={{ width: '100%', maxWidth: calculateWidth(400), gap: calculateHeight(12) }}>
-          <Text className="text-primary-500 font-display-bold mb-4 mt-8"
-            style={{fontSize: calculateFontSize(22), color: theme.colors.red}}>
+          <Text 
+            className="text-primary-500 mb-4 mt-8"
+            style={{
+              fontSize: calculateFontSize(22), 
+              color: theme.colors.red,
+              fontFamily: 'SFProDisplay-Bold'
+            }}>
             Event Cards
           </Text>
 
@@ -177,8 +183,13 @@ export default function Index() {
             event={exampleEvents[1]}
           />
 
-          <Text className="text-primary-500 font-display-bold mb-4 mt-8"
-            style={{fontSize: calculateFontSize(22), color: theme.colors.red}}>
+          <Text 
+            className="text-primary-500 mb-4 mt-8"
+            style={{
+              fontSize: calculateFontSize(22), 
+              color: theme.colors.red,
+              fontFamily: 'SFProDisplay-Bold'
+            }}>
             Payment Method 
           </Text>
                   
@@ -205,8 +216,13 @@ export default function Index() {
                     fullWidth
                     onPress={() => setSelectedPayment('bank-link')}
                   />
-                  <Text className="text-primary-500 font-display-bold mb-4 mt-8"
-                  style={{fontSize: calculateFontSize(22), color: theme.colors.red}}>
+                  <Text 
+                    className="text-primary-500 mb-4 mt-8"
+                    style={{
+                      fontSize: calculateFontSize(22), 
+                      color: theme.colors.red,
+                      fontFamily: 'SFProDisplay-Bold'
+                    }}>
                     Reset Password
                   </Text>
                   
@@ -228,8 +244,13 @@ export default function Index() {
                     onPress={() => setSelectedResetMethod('phone')}
                   />
                   
-                  <Text className="text-primary-500 font-display-bold mb-4 mt-8"
-                  style={{fontSize: calculateFontSize(22), color: theme.colors.red}}>
+                  <Text 
+                    className="text-primary-500 mb-4 mt-8"
+                    style={{
+                      fontSize: calculateFontSize(22), 
+                      color: theme.colors.red,
+                      fontFamily: 'SFProDisplay-Bold'
+                    }}>
                     Ticket Type
                   </Text>
                   
@@ -249,8 +270,13 @@ export default function Index() {
                     onPress={() => setSelectedTicketType('vip')}
                   />
                   
-                  <Text className="text-primary-500 font-display-bold mb-4 mt-8"
-                  style={{fontSize: calculateFontSize(22), color: theme.colors.red}}>
+                  <Text 
+                    className="text-primary-500 mb-4 mt-8"
+                    style={{
+                      fontSize: calculateFontSize(22), 
+                      color: theme.colors.red,
+                      fontFamily: 'SFProDisplay-Bold'
+                    }}>
                     --------------
                   </Text>
                 </View>          

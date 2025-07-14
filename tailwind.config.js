@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}"
+  ],
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
@@ -42,6 +45,12 @@ module.exports = {
         display: ["SFProDisplay-Regular"],
         'display-bold': ["SFProDisplay-Bold"],
         'display-medium': ["SFProDisplay-Medium"],
+        'display-black-italic': ["SFProDisplay-BlackItalic"],
+        'display-heavy-italic': ["SFProDisplay-HeavyItalic"],
+        'display-light-italic': ["SFProDisplay-LightItalic"],
+        'display-semibold-italic': ["SFProDisplay-SemiBoldItalic"],
+        'display-thin-italic': ["SFProDisplay-ThinItalic"],
+        'display-ultralight-italic': ["SFProDisplay-UltraLightItalic"],
       },
     },
   },
