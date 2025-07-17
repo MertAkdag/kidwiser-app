@@ -2,6 +2,7 @@ import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import React, { useEffect } from 'react'
 import './global.css'
+import { AuthProvider } from './src/hooks/useAuth'
 import Navigation from './src/navigation'
 
 
@@ -29,5 +30,9 @@ export default function App() {
     return null
   }
 
-  return <Navigation />
+  return (
+    <AuthProvider>
+      <Navigation />
+    </AuthProvider>
+  )
 }
