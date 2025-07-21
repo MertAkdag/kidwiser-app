@@ -10,6 +10,9 @@ export const SCREENS = {
   PROFILE: 'Profile',
   ONBOARDING: 'Onboarding',
   ONBOARDING_WELCOME: 'OnboardingWelcome',
+  LOGIN: 'Login',
+  REGISTER: 'Register',
+  VERIFICATION_CODE: 'VerificationCode',
 } as const
 
 export type NavigatorNames = typeof NAVIGATORS[keyof typeof NAVIGATORS]

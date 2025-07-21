@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { theme } from '../../constants/Colors';
 import { useResponsive } from '../../hooks/useResponsive';
 import Icon, { IconName } from '../icon/Icon';
@@ -8,6 +8,7 @@ import {
     Text,
     TextInput,
     TextInputProps,
+    TextStyle,
     TouchableOpacity,
     TouchableWithoutFeedback,
     View,
@@ -20,9 +21,15 @@ export interface InputProps extends TextInputProps {
   iconColor?: string;
   iconSize?: number;
   isPassword?: boolean;
-  variant?: 'default' | 'small' | 'search';
+  variant?: 'default' | 'small' | 'search' | 'pin';
   onClear?: () => void;
   showClearButton?: boolean;
+
+  length?: number;
+  onComplete?: (value: string) => void;
+  error?: boolean;
+  pinStyle?: ViewStyle;
+  pinTextStyle?: TextStyle;
 }
 
 export default function Input({
@@ -34,6 +41,13 @@ export default function Input({
   variant = 'default',
   onClear,
   showClearButton = false,
+
+  length = 4,
+  onComplete,
+  error = false,
+  pinStyle,
+  pinTextStyle,
+  
   style,
   ...props
 }: InputProps) {
@@ -42,11 +56,170 @@ export default function Input({
   const [secure, setSecure] = useState(isPassword);
   const inputRef = useRef<TextInput>(null);
 
+  const [internalValue, setInternalValue] = useState(props.value || '');
+  const isPinVariant = variant === 'pin';
   const isSearchVariant = variant === 'search';
   const searchIcon = isSearchVariant ? 'search' : icon;
-  const searchIconColor = isSearchVariant ? theme.colors.greyscale[500] : iconColor;
+
+  useEffect(() => {
+    if (isPinVariant && props.value !== undefined) {
+      setInternalValue(String(props.value));
+    }
+  }, [props.value, isPinVariant]);
+
+  useEffect(() => {
+    if (isPinVariant && internalValue.length === length && onComplete) {
+      onComplete(internalValue);
+    }
+  }, [internalValue, length, onComplete, isPinVariant]);
+
+  useEffect(() => {
+    if (isPinVariant && props.autoFocus) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+    }
+  }, [isPinVariant, props.autoFocus]);
+  
+  const getIconColor = () => {
+    if (focused) {
+      return theme.colors.primary[500];
+    }
+    if (isSearchVariant) {
+      return theme.colors.greyscale[500];
+    }
+    return iconColor;
+  };
+  
+  const searchIconColor = getIconColor();
   const shouldShowClearButton = isSearchVariant ? (props.value && String(props.value).length > 0) : showClearButton;
 
+  const handlePinChangeText = (text: string) => {
+    if (!isPinVariant) return;
+    
+    text = text.replace(/[^0-9]/g, '');
+    
+    if (text.length > length) {
+      text = text.slice(0, length);
+    }
+
+    setInternalValue(text);
+    props.onChangeText?.(text);
+  };
+
+  const renderPinInput = () => {
+    if (!isPinVariant) return null;
+
+    const renderPinBoxes = () => {
+      return Array.from({ length }, (_, index) => {
+        const char = internalValue[index] || '';
+        const hasValue = index < internalValue.length;
+        const isActive = index === internalValue.length && focused;
+        
+        return (
+          <View
+            key={index}
+            style={[
+              {
+                width: calculateWidth(60),
+                height: calculateWidth(60),
+                borderRadius: calculateWidth(16),
+                borderWidth: 2,
+                borderColor: error 
+                  ? theme.colors.red
+                  : isActive 
+                    ? theme.colors.primary[500]
+                    : theme.colors.greyscale[200],
+                backgroundColor: 'transparent',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginHorizontal: calculateWidth(6),
+              },
+              pinStyle,
+            ]}
+          >
+            <Text style={[
+              {
+                fontSize: calculateFontSize(24),
+                fontWeight: '600',
+                fontFamily: 'SFProDisplay-Semibold',
+                color: hasValue ? theme.colors.greyscale[900] : theme.colors.greyscale[400],
+              },
+              pinTextStyle,
+            ]}>
+              {char}
+            </Text>
+          </View>
+        );
+      });
+    };
+
+    return (
+      <View style={{ marginBottom: calculateHeight(16) }}>
+        {label && (
+          <Text
+            style={{
+              fontSize: calculateFontSize(15),
+              marginBottom: calculateHeight(8),
+              color: theme.text.primary,
+            }}
+          >
+            {label}
+          </Text>
+        )}
+        
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => {
+            console.log('dokunuldu');
+            inputRef.current?.focus();
+          }}
+          style={[
+            {
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'relative',
+              paddingVertical: calculateHeight(8),
+            },
+            style
+          ]}
+        >
+          {renderPinBoxes()}
+          <TextInput
+            ref={inputRef}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              opacity: 0,
+              color: 'transparent',
+              backgroundColor: 'transparent',
+              borderColor: 'transparent',
+              fontSize: 1,
+            }}
+            value={internalValue}
+            onChangeText={handlePinChangeText}
+            onFocus={(e) => {
+              console.log('pin odaklandı');
+              handleFocus(e);
+            }}
+            onBlur={handleBlur}
+            keyboardType="numeric"
+            maxLength={length}
+            autoCorrect={false}
+            autoCapitalize="none"
+            autoFocus={props.autoFocus}
+            textContentType="oneTimeCode"
+            selectionColor="transparent"
+            caretHidden={true}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  };
   const renderIcon = () => {
     const iconToRender = searchIcon || icon;
     if (!iconToRender) return null;
@@ -113,6 +286,10 @@ export default function Input({
   const handleClear = () => {
     onClear?.();
   };
+
+  if (isPinVariant) {
+    return renderPinInput();
+  }
 
   return (
     <View style={{ marginBottom: calculateHeight(16) }}>

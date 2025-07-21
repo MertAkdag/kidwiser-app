@@ -6,12 +6,16 @@ import { theme } from '../../constants/Colors';
 import { useAuth } from '../../hooks/useAuth';
 import { useResponsive } from '../../hooks/useResponsive';
 
-export default function Welcome() {
+interface WelcomeProps {
+  navigation: any;
+}
+
+export default function Welcome({ navigation }: WelcomeProps) {
   const { completeOnboarding } = useAuth();
   const { calculateWidth, calculateHeight, calculateFontSize } = useResponsive();
 
   const handleStart = () => {
-    completeOnboarding();
+    navigation.navigate('Login');
   };
 
   const handleSocialStart = (provider: string) => {

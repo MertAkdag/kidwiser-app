@@ -21,6 +21,8 @@ export interface ButtonProps extends TouchableOpacityProps {
   fullWidth?: boolean;
   price?: string;
   socialText?: string;
+  fontFamily?: string;
+  fontWeight?: '400' | '500' | '600' | '700' | 'normal' | 'bold';
 }
 
 export default function Button({
@@ -35,6 +37,8 @@ export default function Button({
   fullWidth = false,
   price,
   socialText,
+  fontFamily,
+  fontWeight,
   style,
   ...props
 }: ButtonProps) {
@@ -77,6 +81,7 @@ export default function Button({
           text: {
             color: theme.colors.primary[500],
             fontWeight: '600' as const,
+            fontFamily: fontFamily || 'SFProDisplay-Medium',
           },
         };
         
@@ -90,7 +95,8 @@ export default function Button({
           },
           text: {
             color: theme.colors.greyscale[900],
-            fontWeight: '500' as const,
+            fontWeight: fontWeight || '500' as const,
+            fontFamily: fontFamily || 'SFProDisplay-Medium',
           },
         };
         
@@ -103,7 +109,8 @@ export default function Button({
           },
           text: {
             color: theme.colors.white,
-            fontWeight: '600' as const,
+            fontWeight: fontWeight || '600' as const,
+            fontFamily: fontFamily || 'SFProDisplay-Medium',
           },
         };
         
@@ -116,7 +123,8 @@ export default function Button({
           },
           text: {
             color: theme.colors.white,
-            fontWeight: '600' as const,
+            fontWeight: fontWeight || '600' as const,
+            fontFamily: fontFamily || 'SFProDisplay-Medium',
           },
         };
     }
@@ -169,6 +177,7 @@ export default function Button({
           {
             fontSize: sizeStyles.fontSize,
             fontWeight: variantStyles.text.fontWeight,
+            fontFamily: variantStyles.text.fontFamily,
             color: variantStyles.text.color,
           },
           disabledStyles.text,
@@ -185,6 +194,7 @@ export default function Button({
               {
                 fontSize: sizeStyles.fontSize,
                 fontWeight: '700',
+                fontFamily: fontFamily || 'SFProDisplay-Bold',
                 color: variantStyles.text.color,
                 marginRight: calculateWidth(8),
               },
@@ -224,6 +234,7 @@ export default function Button({
           {
             fontSize: sizeStyles.fontSize,
             fontWeight: variantStyles.text.fontWeight,
+            fontFamily: variantStyles.text.fontFamily,
             color: variantStyles.text.color,
             marginLeft: (iconPosition === 'left' && icon) ? calculateWidth(8) : 0,
             marginRight: (iconPosition === 'right' && icon) ? calculateWidth(8) : 0,
