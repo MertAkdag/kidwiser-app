@@ -58,7 +58,7 @@ export default function Index() {
       keyboardVerticalOffset={0}
     >
       <ScrollView 
-        style={{ flex: 1, backgroundColor: theme.colors.greyscale[200]}}
+        style={{ flex: 1, backgroundColor: theme.colors.white}}
         contentContainerStyle={{ 
           flexGrow: 1, 
           justifyContent: 'center', 

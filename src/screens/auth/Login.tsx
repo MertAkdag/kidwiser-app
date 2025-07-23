@@ -11,6 +11,42 @@ interface LoginProps {
   navigation: any;
 }
 
+const formatPhoneNumber = (value: string): string => {
+const digits = value.replace(/\D/g, '');  
+  
+  let formattedDigits = digits;
+  if (digits.length > 0 && !digits.startsWith('0')) {
+    formattedDigits = '0' + digits;
+  }
+  
+  
+  if (formattedDigits.length > 11) {
+    formattedDigits = formattedDigits.slice(0, 11);
+  }
+  
+  if (formattedDigits.length <= 1) {
+    return formattedDigits;
+  } else if (formattedDigits.length <= 4) {
+    return `${formattedDigits[0]} (${formattedDigits.slice(1)}`;
+  } else if (formattedDigits.length <= 7) {
+    return `${formattedDigits[0]} (${formattedDigits.slice(1, 4)}) ${formattedDigits.slice(4)}`;
+  } else if (formattedDigits.length <= 9) {
+    return `${formattedDigits[0]} (${formattedDigits.slice(1, 4)}) ${formattedDigits.slice(4, 7)} ${formattedDigits.slice(7)}`;
+  } else {
+    return `${formattedDigits[0]} (${formattedDigits.slice(1, 4)}) ${formattedDigits.slice(4, 7)} ${formattedDigits.slice(7, 9)} ${formattedDigits.slice(9)}`;
+  }
+};
+
+const getApiPhoneNumber = (formattedPhone: string): string => {
+  const digits = formattedPhone.replace(/\D/g, '');
+  
+  if (digits.startsWith('0')) {
+    return '90' + digits.slice(1);
+  }
+  
+  return '90' + digits;
+};
+
 export default function Login({ navigation }: LoginProps) {
   const { calculateWidth, calculateHeight, calculateFontSize } = useResponsive();
   const { completeOnboarding } = useAuth();
@@ -18,6 +54,23 @@ export default function Login({ navigation }: LoginProps) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
 
+  const areAllFieldsFilled = () => {
+    return phoneNumber.trim() !== '' && password.trim() !== '';
+  };
+
+  const handlePhoneNumberChange = (value: string) => {
+    const digitsOnly = value.replace(/\D/g, '');
+    const formatted = formatPhoneNumber(digitsOnly);
+    setPhoneNumber(formatted);
+  };
+
+  const handleLogin = () => {
+    if (areAllFieldsFilled()) {
+      const apiPhoneNumber = getApiPhoneNumber(phoneNumber);
+      console.log(apiPhoneNumber);
+      completeOnboarding();
+    }
+  };
 
   const handleSocialLogin = (provider: string) => {
     completeOnboarding();
@@ -28,6 +81,7 @@ export default function Login({ navigation }: LoginProps) {
   };
 
   const handleForgotPassword = () => {
+    navigation.navigate('ForgotPassword');
   };
 
   const handleSignUp = () => {
@@ -99,10 +153,11 @@ export default function Login({ navigation }: LoginProps) {
               <Input
                 placeholder="Telefon Numaranı Gir"
                 value={phoneNumber}
-                onChangeText={setPhoneNumber}
+                onChangeText={handlePhoneNumberChange}
                 icon="phone"
                 keyboardType="phone-pad"
                 iconColor={theme.colors.greyscale[600]}
+                maxLength={18}
                 style={{
                   width: '100%',
                 }}
@@ -146,7 +201,8 @@ export default function Login({ navigation }: LoginProps) {
               title="Giriş Yap"
               variant="primary"
               size="large"
-              onPress={() => completeOnboarding()}
+              onPress={handleLogin}
+              disabled={!areAllFieldsFilled()}
               fullWidth
               fontFamily="SFProDisplay-Bold"
               fontWeight="700"
