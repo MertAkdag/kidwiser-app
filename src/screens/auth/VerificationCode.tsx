@@ -11,7 +11,7 @@ import { PrimaryButton } from '../../components/button';
 import Icon from '../../components/icon/Icon';
 import Input from '../../components/input/input';
 import { theme } from '../../constants/Colors';
-import { useAuth } from '../../hooks/useAuth';
+import { NAVIGATORS } from '../../constants/screens';
 import { useResponsive } from '../../hooks/useResponsive';
 
 interface VerificationCodeProps {
@@ -21,7 +21,6 @@ interface VerificationCodeProps {
 
 export default function VerificationCode({ navigation }: VerificationCodeProps) {
   const { calculateWidth, calculateHeight, calculateFontSize } = useResponsive();
-  const { completeOnboarding } = useAuth();
   const [code, setCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -46,7 +45,7 @@ export default function VerificationCode({ navigation }: VerificationCodeProps) 
     
     setTimeout(() => {
       setIsLoading(false);
-      completeOnboarding();
+      navigation.navigate(NAVIGATORS.TAB_NAVIGATOR);
     },);
   };
 

@@ -86,7 +86,7 @@ export default function Input({
       return theme.colors.primary[500];
     }
     if (isSearchVariant) {
-      return theme.colors.greyscale[500];
+      return theme.colors.greyscale[900];
     }
     return iconColor;
   };
@@ -247,7 +247,7 @@ export default function Input({
           height: calculateHeight(64),
           width: '100%',
           borderRadius: calculateWidth(16),
-          backgroundColor: focused ? theme.colors.white : 'transparent',
+          backgroundColor: theme.colors.white,
           borderWidth: focused ? 2 : 1,
           borderColor: focused ? theme.colors.primary[500] : theme.colors.greyscale[200],
         };
@@ -348,7 +348,7 @@ export default function Input({
               style,
             ]}
             placeholder={isSearchVariant ? "Search events..." : props.placeholder}
-            placeholderTextColor={isSearchVariant ? theme.colors.greyscale[300] : theme.colors.greyscale[400]}
+            placeholderTextColor={isSearchVariant ? theme.colors.greyscale[500] : theme.colors.greyscale[400]}
             secureTextEntry={secure}
             onFocus={handleFocus}
             onBlur={handleBlur}

@@ -1,11 +1,11 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import React from 'react'
-import CustomTabBar from '../components/bottomnavigation/customTabBar'
-import { SCREENS } from '../constants/screens'
-import HomeScreen from '../screens/example'
-import FavoritesScreen from '../screens/favorites'
-import ProfileScreen from '../screens/profile'
-import TicketScreen from '../screens/ticket'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from 'react';
+import CustomTabBar from '../components/bottomnavigation/customTabBar';
+import { SCREENS } from '../constants/screens';
+import FavoritesScreen from '../screens/favorites';
+import HomeScreen from '../screens/home';
+import ProfileScreen from '../screens/profile';
+import TicketScreen from '../screens/ticket';
 
 export type TabParamList = {
   [SCREENS.HOME]: undefined

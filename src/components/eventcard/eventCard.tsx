@@ -19,7 +19,7 @@ export interface EventData {
   date: string;
   time?: string; 
   location?: string;
-  imageUrl?: string;
+  imageUrl: string;
   attendeeCount?: number;
   attendeeAvatars?: ImageSourcePropType[];
 }
@@ -98,11 +98,7 @@ export default function EventCard({
       >
         <View style={listStyles.imageWrapper}>
           <Image
-            source={
-              event.imageUrl
-                ? { uri: event.imageUrl }
-                : require('../../assets/images/antalyatersev.png')
-            }
+            source={event.imageUrl as ImageSourcePropType}
             resizeMode="cover"
             style={{ width: '100%', height: '100%' } as ImageStyle}
           />
@@ -218,11 +214,7 @@ export default function EventCard({
     >
       <View style={cardStyles.imageWrapper}>
         <Image
-          source={
-            event.imageUrl
-              ? { uri: event.imageUrl }
-              : require('../../assets/images/antalyatersev.png')
-          }
+          source={event.imageUrl as ImageSourcePropType}
           resizeMode="cover"
           style={{ width: '100%', height: '100%' } as ImageStyle}
         />
@@ -356,7 +348,7 @@ export default function EventCard({
             }}
           >
             <Icon
-              name="map-pin"
+              name="map-pin-outline"
               size={calculateWidth(14)}
               color={theme.colors.greyscale[500]}
               style={{ marginRight: calculateWidth(4)}}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -19,6 +19,7 @@ export interface CardProps extends TouchableOpacityProps {
   subtitle?: string;
   fullWidth?: boolean;
   showCheckMark?: boolean;
+  children?: ReactNode;
 }
 
 export default function Card({
@@ -33,6 +34,7 @@ export default function Card({
   showCheckMark = true,
   style,
   onPress,
+  children,
   ...props
 }: CardProps) {
   const { calculateWidth, calculateHeight, calculateFontSize } = useResponsive();
@@ -68,7 +70,7 @@ export default function Card({
         return {
           container: {
             ...baseStyle,
-            borderWidth: 1,
+            borderWidth: 2,
             borderColor: theme.colors.greyscale[200],
             backgroundColor: theme.colors.white,
             height: calculateHeight(64),
@@ -184,6 +186,7 @@ export default function Card({
       {renderIconContainer()}
       {renderTextContent()}
       {renderCheckMark()}
+      {children}
     </TouchableOpacity>
   );
 }

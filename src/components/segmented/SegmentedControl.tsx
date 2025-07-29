@@ -128,8 +128,7 @@ export default function SegmentedControl({
       style={[
         {
           flexDirection: 'row',
-          // TODO: background color değişecek görüntü belli olsun diye 500 e çektim normalde 50 olacak
-          backgroundColor: theme.colors.greyscale[500],
+          backgroundColor: theme.colors.greyscale[50],
           borderRadius: calculateWidth(12),
           padding: PADDING,
           gap: PADDING,

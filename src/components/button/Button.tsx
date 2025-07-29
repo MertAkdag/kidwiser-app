@@ -74,7 +74,7 @@ export default function Button({
       case 'secondary':
         return {
           container: {
-            backgroundColor: theme.colors.greyscale[100],
+            backgroundColor: theme.colors.primary[50],
             borderRadius: calculateWidth(16),
             borderWidth: 0,
           },
@@ -260,14 +260,20 @@ export default function Button({
           paddingHorizontal: sizeStyles.paddingHorizontal,
           width: fullWidth ? '100%' : undefined,
           minWidth: fullWidth ? undefined : calculateWidth(120),
-          shadowColor: variant === 'social' ? 'transparent' : theme.colors.primary[500],
+          shadowColor:
+            variant === 'social' || variant === 'secondary'
+              ? 'transparent'
+              : theme.colors.primary[500],
           shadowOffset: {
             width: 0,
-            height: variant === 'social' ? 1 : 2,
+            height: variant === 'social' ? 1 : variant === 'secondary' ? 0 : 2,
           },
-          shadowOpacity: variant === 'social' ? 0.05 : 0.1,
-          shadowRadius: variant === 'social' ? 2 : 4,
-          elevation: variant === 'social' ? 1 : 2,
+          shadowOpacity:
+            variant === 'social' ? 0.05 : variant === 'secondary' ? 0 : 0.1,
+          shadowRadius:
+            variant === 'social' ? 2 : variant === 'secondary' ? 0 : 4,
+          elevation:
+            variant === 'social' ? 1 : variant === 'secondary' ? 0 : 2,
         },
         variantStyles.container,
         disabledStyles.container,

@@ -3,7 +3,7 @@ import React from 'react';
 import { Image, SafeAreaView, Text, View } from 'react-native';
 import Button from '../../components/button/Button';
 import { theme } from '../../constants/Colors';
-import { useAuth } from '../../hooks/useAuth';
+import { NAVIGATORS } from '../../constants/screens';
 import { useResponsive } from '../../hooks/useResponsive';
 
 interface WelcomeProps {
@@ -11,15 +11,14 @@ interface WelcomeProps {
 }
 
 export default function Welcome({ navigation }: WelcomeProps) {
-  const { completeOnboarding } = useAuth();
   const { calculateWidth, calculateHeight, calculateFontSize } = useResponsive();
 
   const handleStart = () => {
-    navigation.navigate('Login');
+    navigation.navigate(NAVIGATORS.AUTH_NAVIGATOR);
   };
 
   const handleSocialStart = (provider: string) => {
-    completeOnboarding();
+    navigation.navigate(NAVIGATORS.TAB_NAVIGATOR);
   };
 
   return (

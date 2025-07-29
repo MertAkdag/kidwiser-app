@@ -4,7 +4,7 @@ import Button from '../../components/button/Button';
 import Icon from '../../components/icon/Icon';
 import Input from '../../components/input/input';
 import { theme } from '../../constants/Colors';
-import { useAuth } from '../../hooks/useAuth';
+import { NAVIGATORS } from '../../constants/screens';
 import { useResponsive } from '../../hooks/useResponsive';
 
 interface LoginProps {
@@ -49,7 +49,6 @@ const getApiPhoneNumber = (formattedPhone: string): string => {
 
 export default function Login({ navigation }: LoginProps) {
   const { calculateWidth, calculateHeight, calculateFontSize } = useResponsive();
-  const { completeOnboarding } = useAuth();
   
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
@@ -68,12 +67,12 @@ export default function Login({ navigation }: LoginProps) {
     if (areAllFieldsFilled()) {
       const apiPhoneNumber = getApiPhoneNumber(phoneNumber);
       console.log(apiPhoneNumber);
-      completeOnboarding();
+      navigation.navigate(NAVIGATORS.TAB_NAVIGATOR);
     }
   };
 
   const handleSocialLogin = (provider: string) => {
-    completeOnboarding();
+    navigation.navigate(NAVIGATORS.TAB_NAVIGATOR);
   };
 
   const handleGoBack = () => {

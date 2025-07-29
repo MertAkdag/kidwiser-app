@@ -4,8 +4,7 @@ import Button from '../../components/button/Button';
 import Icon from '../../components/icon/Icon';
 import Input from '../../components/input/input';
 import { theme } from '../../constants/Colors';
-import { SCREENS } from '../../constants/screens';
-import { useAuth } from '../../hooks/useAuth';
+import { NAVIGATORS, SCREENS } from '../../constants/screens';
 import { useResponsive } from '../../hooks/useResponsive';
 
 interface RegisterProps {
@@ -47,7 +46,6 @@ const digits = formattedPhone.replace(/\D/g, '');
 
 export default function Register({ navigation }: RegisterProps) {
   const { calculateWidth, calculateHeight, calculateFontSize } = useResponsive();
-  const { completeOnboarding } = useAuth();
   
   const [fullName, setFullName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -72,7 +70,7 @@ export default function Register({ navigation }: RegisterProps) {
   };
 
   const handleSocialRegister = (provider: string) => {
-    completeOnboarding();
+    navigation.navigate(NAVIGATORS.TAB_NAVIGATOR);
   };
 
   const handleGoBack = () => {

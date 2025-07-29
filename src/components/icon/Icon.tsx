@@ -24,7 +24,7 @@ import Home1Icon from '../../assets/icons/home-1'
 import LockIcon from '../../assets/icons/lock'
 import MailIcon from '../../assets/icons/mail'
 import MapPinIcon from '../../assets/icons/map-pin'
-import MapPin1Icon from '../../assets/icons/map-pin-1'
+import MapPinOutlineIcon from '../../assets/icons/map-pin-outline'
 import MusicIcon from '../../assets/icons/music'
 import PhoneIcon from '../../assets/icons/phone'
 import PhoneXIcon from '../../assets/icons/phone-x'
@@ -61,7 +61,7 @@ const icons = {
   'phone-x': PhoneXIcon,
   
   'map-pin': MapPinIcon,
-  'map-pin-filled': MapPin1Icon,
+  'map-pin-outline': MapPinOutlineIcon,
   
   trash: TrashIcon,
   lock: LockIcon,
