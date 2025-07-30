@@ -141,7 +141,7 @@ export default function Button({
         opacity: 0.5,
       },
       text: {
-        color: theme.colors.greyscale[400],
+        color: theme.colors.white,
       },
     };
   };

@@ -22,6 +22,7 @@ export const SCREENS = {
   FORGOT_PASSWORD_VERIFICATION: 'ForgotPasswordVerification',
   NEW_PASSWORD: 'NewPassword',
   PASSWORD_RESET_SUCCESS: 'PasswordResetSuccess',
+  INTEREST_SELECTION: 'InterestSelection',
   EVENT_DETAIL: 'EventDetail',
 } as const
 

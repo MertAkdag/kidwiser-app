@@ -11,7 +11,7 @@ import { PrimaryButton } from '../../components/button';
 import Icon from '../../components/icon/Icon';
 import Input from '../../components/input/input';
 import { theme } from '../../constants/Colors';
-import { NAVIGATORS } from '../../constants/screens';
+import { NAVIGATORS, SCREENS } from '../../constants/screens';
 import { useResponsive } from '../../hooks/useResponsive';
 
 interface VerificationCodeProps {
@@ -45,7 +45,7 @@ export default function VerificationCode({ navigation }: VerificationCodeProps) 
     
     setTimeout(() => {
       setIsLoading(false);
-      navigation.navigate(NAVIGATORS.TAB_NAVIGATOR);
+      navigation.navigate(SCREENS.INTEREST_SELECTION);
     },);
   };
 

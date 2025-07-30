@@ -12,6 +12,7 @@ import {
     ResetPasswordPhone,
     VerificationCode
 } from '../screens/auth';
+import { InterestSelection } from '../screens/shared';
 
 export type AuthStackParamList = {
   [SCREENS.LOGIN]: undefined;
@@ -23,6 +24,7 @@ export type AuthStackParamList = {
   [SCREENS.FORGOT_PASSWORD_VERIFICATION]: { resetMethod: string; contact: string };
   [SCREENS.NEW_PASSWORD]: { resetMethod: string; contact: string; verificationCode: string };
   [SCREENS.PASSWORD_RESET_SUCCESS]: undefined;
+  [SCREENS.INTEREST_SELECTION]: undefined;
 };
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
@@ -74,6 +76,13 @@ const AuthNavigator: React.FC = () => {
         name={SCREENS.PASSWORD_RESET_SUCCESS}
         component={PasswordResetSuccess}
       />
+      <Stack.Screen name={SCREENS.INTEREST_SELECTION}>
+        {() => (
+          <InterestSelection 
+            mode="onboarding"
+          />
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 };
