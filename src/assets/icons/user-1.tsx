@@ -9,19 +9,19 @@ const User1Icon = (props: SvgProps) => {
     <Svg 
       width={props.width || size} 
       height={props.height || size} 
-      viewBox="0 0 24 24" 
+      viewBox="0 0 14 20" 
       fill="none"
       {...props}
     >
       <Path 
-        d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" 
+        d="M7 9C9.20914 9 11 7.20914 11 5C11 2.79086 9.20914 1 7 1C4.79086 1 3 2.79086 3 5C3 7.20914 4.79086 9 7 9Z" 
         stroke={props.color || "#1A202C"} 
         strokeWidth="1.5" 
         strokeLinecap="round" 
         strokeLinejoin="round"
       />
       <Path 
-        d="M6 21V19C6 17.9391 6.42143 16.9217 7.17157 16.1716C7.92172 15.4214 8.93913 15 10 15H14C15.0609 15 16.0783 15.4214 16.8284 16.1716C17.5786 16.9217 18 17.9391 18 19V21" 
+        d="M1 19V17C1 15.9391 1.42143 14.9217 2.17157 14.1716C2.92172 13.4214 3.93913 13 5 13H9C10.0609 13 11.0783 13.4214 11.8284 14.1716C12.5786 14.9217 13 15.9391 13 17V19" 
         stroke={props.color || "#1A202C"} 
         strokeWidth="1.5" 
         strokeLinecap="round" 

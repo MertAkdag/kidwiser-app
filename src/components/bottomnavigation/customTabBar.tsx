@@ -15,25 +15,25 @@ interface TabItem {
 const tabItems: TabItem[] = [
   {
     key: 'Home',
-    label: 'Home',
+    label: 'Anasayfa',
     icon: 'home',
     iconOutline: 'home-outline'
   },
   {
     key: 'Favorites',
-    label: 'Favorites', 
+    label: 'Favoriler', 
     icon: 'heart',
     iconOutline: 'heart-outline'
   },
   {
     key: 'Ticket',
-    label: 'Ticket',
+    label: 'Biletlerim',
     icon: 'ticket',
     iconOutline: 'ticket-outline'
   },
   {
     key: 'Profile',
-    label: 'Profile',
+    label: 'Profil',
     icon: 'user',
     iconOutline: 'user-outline'
   }

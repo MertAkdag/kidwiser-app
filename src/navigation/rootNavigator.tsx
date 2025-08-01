@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 import { NAVIGATORS, SCREENS } from '../constants/screens'
 import SearchScreen from '../screens/search'
+import { InterestSelection } from '../screens/shared'
 import AuthNavigator from './AuthNavigator'
 import EventNavigator from './EventNavigator'
 import OnboardingNavigator from './OnboardingNavigator'
@@ -13,6 +14,7 @@ export type RootStackParamList = {
   [NAVIGATORS.AUTH_NAVIGATOR]: undefined
   [NAVIGATORS.EVENT_NAVIGATOR]: undefined
   [SCREENS.SEARCH]: undefined
+  [SCREENS.PROFILE_INTEREST_SELECTION]: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -49,6 +51,23 @@ const RootNavigator: React.FC = () => {
           animation: 'slide_from_right',
         }}
       />
+      <Stack.Screen
+        name={SCREENS.PROFILE_INTEREST_SELECTION}
+        options={{
+          animation: 'slide_from_right',
+        }}
+      >
+        {({ navigation }) => (
+          <InterestSelection 
+            mode="profile"
+            onComplete={(interests) => {
+              console.log('Updated interests:', interests);
+              navigation.goBack();
+            }}
+            onCancel={() => navigation.goBack()}
+          />
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
   )
 }

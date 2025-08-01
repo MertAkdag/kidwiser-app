@@ -40,6 +40,9 @@ import TriangleSquareCircleIcon from '../../assets/icons/triangle-square-circle'
 import UserIcon from '../../assets/icons/user'
 import User1Icon from '../../assets/icons/user-1'
 import XIcon from '../../assets/icons/x'
+import SettingsIcon from '../../assets/icons/settings'
+import QuestionMarkIcon from '../../assets/icons/question-mark'
+import LogoutIcon from '../../assets/icons/logout'
 
 const icons = {
   bell: BellIcon,
@@ -93,6 +96,10 @@ const icons = {
   'building-bank': BuildingBankIcon,
   'brand-dribbble': BrandDribbbleIcon,
   'triangle-square-circle': TriangleSquareCircleIcon,
+  
+  settings: SettingsIcon,
+  'question-mark': QuestionMarkIcon,
+  logout: LogoutIcon,
 } as const
 
 export type IconName = keyof typeof icons

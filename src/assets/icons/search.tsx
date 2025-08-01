@@ -18,14 +18,14 @@ const SearchIcon = (props: SvgProps) => {
         cy="11.7666" 
         r="8.98856" 
         stroke={props.color || "#1A202C"} 
-        strokeWidth="1.5" 
+        strokeWidth="2" 
         strokeLinecap="round" 
         strokeLinejoin="round"
       />
       <Path 
         d="M18.0181 18.4851L21.5421 22" 
         stroke={props.color || "#1A202C"} 
-        strokeWidth="1.5" 
+        strokeWidth="2" 
         strokeLinecap="round" 
         strokeLinejoin="round"
       />

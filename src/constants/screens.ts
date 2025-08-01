@@ -10,6 +10,7 @@ export const SCREENS = {
   FAVORITES: 'Favorites',
   TICKET: 'Ticket',
   PROFILE: 'Profile',
+  PROFILE_HOME: 'ProfileHome',
   SEARCH: 'Search',
   ONBOARDING: 'Onboarding',
   ONBOARDING_WELCOME: 'OnboardingWelcome',
@@ -23,6 +24,8 @@ export const SCREENS = {
   NEW_PASSWORD: 'NewPassword',
   PASSWORD_RESET_SUCCESS: 'PasswordResetSuccess',
   INTEREST_SELECTION: 'InterestSelection',
+  PROFILE_INTEREST_SELECTION: 'PROFILE_INTEREST_SELECTION',
+  USER_INFO: 'UserInfo',
   EVENT_DETAIL: 'EventDetail',
 } as const
 
